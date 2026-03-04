@@ -1,0 +1,538 @@
+:root {
+  --blue-dark: #081F5C;
+  --blue-medium: #24386E;
+  --blue-light: #546FA8;
+  --accent-blue-soft: #D4EBFF;
+  
+  /* Couleurs de données (Blue-only) */
+  --color-battery: #3b82f6; 
+  --color-temp: #60a5fa;   
+  --color-mode: #546FA8;   
+  --color-pos: #94a3b8;    
+}
+
+body.dark-mode {
+  --background-page: #040D1A;
+  --card-bg: rgba(8, 31, 92, 0.6);
+  --card-shadow: rgba(0, 0, 0, 0.3);
+  --border-color: rgba(212, 235, 255, 0.1);
+  --text-primary: #F8FAFC;
+  --text-secondary: #D4EBFF;
+  --text-tertiary: #94a3b8;
+}
+
+.dashboard-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+/* Nouvelle disposition horizontale pour les statistiques */
+.dashboard-stats-horizontal {
+  display: flex;
+  gap: 12px; /* Ajoute de l'espace entre les boîtes */
+  margin-bottom: 24px;
+  width: 100%; /* Occupe toute la largeur */
+}
+
+.stat-box-horizontal {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+  background: var(--card-bg);
+  border: 2px solid var(--border-color); /* Bordure plus épaisse */
+  transition: all 0.3s ease;
+  flex: 1; /* Chaque boîte occupe 1/4 de l'espace */
+  min-width: 0;
+  border-radius: 8px; /* Coins arrondis */
+  box-shadow: 0 2px 8px rgba(8, 31, 92, 0.1); /* Ombre légère */
+}
+
+/* Première boîte - bordure gauche spécifique */
+.stat-box-horizontal:first-child {
+  border-left: 4px solid var(--blue-light);
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+}
+
+/* Boîtes du milieu - bordures gauches spécifiques */
+.stat-box-horizontal:nth-child(2) {
+  border-left: 4px solid var(--accent-blue-soft);
+}
+
+.stat-box-horizontal:nth-child(3) {
+  border-left: 4px solid var(--blue-medium);
+}
+
+.stat-box-horizontal:nth-child(4) {
+  border-left: 4px solid #ef4444;
+}
+
+/* Dernière boîte - bordure droite spécifique */
+.stat-box-horizontal:last-child {
+  border-right: 4px solid #ef4444; /* Bordure droite rouge pour la panne */
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+.stat-box {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+  border-radius: 12px;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  transition: all 0.3s ease;
+}
+
+/* Remplacement du vert par le bleu ciel/moyen */
+.stat-total { border-left: 4px solid var(--blue-light); }
+.stat-online { border-left: 4px solid var(--accent-blue-soft); } 
+.stat-missions { border-left: 4px solid var(--blue-medium); }
+.stat-success { border-left: 4px solid #a855f7; }
+
+/* Couleurs pour les nouvelles statistiques horizontales */
+.stat-enligne { border-left: 4px solid var(--accent-blue-soft); }
+.stat-mission { border-left: 4px solid var(--blue-medium); }
+.stat-panne { border-left: 4px solid #ef4444; } /* Rouge pour les pannes */
+
+.stat-value { font-size: 24px; font-weight: 800; color: var(--text-primary); }
+.stat-label { font-size: 11px; text-transform: uppercase; color: var(--text-tertiary); }
+
+
+/* Loading placeholder */
+.loading-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  min-height: 200px;
+  color: var(--text-tertiary);
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid var(--border-color);
+  border-top: 4px solid var(--blue-medium);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 16px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* --- GRILLE DES ROBOTS --- */
+.robots-status-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  grid-auto-flow: row; /* Force le passage à la ligne suivante */
+}
+
+.robot-status-card {
+  padding: 24px; /* Augmenté pour plus d'air */
+  border-radius: 18px;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 4px 12px rgba(8, 31, 92, 0.08);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header : Nom et Badge séparés */
+.robot-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px; /* Espace crucial sous le titre */
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--accent-blue-soft);
+}
+
+.robot-name {
+  font-weight: 800;
+  font-size: 16px;
+  color: var(--blue-dark);
+}
+
+.robot-serial {
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  color: #6b7280;
+  margin-top: 2px;
+  background: #f3f4f6;
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid #e5e7eb;
+}
+
+/* Liste des détails */
+.robot-details {
+  display: flex;
+  flex-direction: column;
+  gap: 16px; /* Espace constant entre chaque ligne d'info */
+}
+
+.robot-info-line {
+  display: flex;
+  justify-content: space-between; /* Pousse la valeur à l'autre bout */
+  align-items: center;
+}
+
+.robot-info-line .label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-tertiary);
+}
+
+.robot-info-line .value {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--blue-medium);
+  text-align: right;
+}
+
+/* Barre de batterie (Bleu NavBot) */
+.battery-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.progress-bar {
+  height: 6px;
+  background: rgba(84, 111, 168, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  /* Remplacement du vert par un dégradé de bleus */
+  background: linear-gradient(90deg, var(--blue-light), var(--blue-medium));
+  border-radius: 10px;
+}
+
+/* Badges de Statut (Remplacement du vert) */
+.robot-badge {
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.status-online { 
+  background: #10b981; 
+  color: white;
+  border: 1px solid #059669;
+}
+
+.status-idle { 
+  background: #f59e0b; 
+  color: white;
+  border: 1px solid #d97706;
+}
+
+.status-offline { 
+  background: #f97316; 
+  color: white;
+  border: 1px solid #ea580c;
+}
+
+.status-broken { 
+  background: #ef4444; 
+  color: white;
+  border: 1px solid #dc2626;
+}
+
+.system-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.system-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  font-size: 13px;
+}
+
+.system-item:hover {
+  background: var(--accent-blue-soft);
+  border-color: var(--blue-light);
+}
+
+.system-item span:first-child {
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--text-tertiary);
+}
+
+.system-value.online {
+  color: var(--blue-medium); /* Remplacement du vert */
+}
+
+
+.map-preview {
+  display: flex;
+  flex-direction: column;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+}
+
+.preview-svg {
+  width: 100%;
+  background: #1a2332; /* Fond Gazebo World */
+}
+
+/* Style de l'indicateur TurtleBot sur la carte */
+.preview-svg circle { fill: var(--accent-blue-soft); }
+.preview-svg rect[stroke="#22c55e"] { stroke: var(--blue-light); } /* Change le périmètre vert en bleu */
+
+.map-info {
+  display: flex;
+  justify-content: space-around;
+  padding: 12px;
+  background: var(--accent-blue-soft); /* Ton bleu ciel */
+  color: var(--blue-dark);
+  font-weight: 700;
+  font-size: 12px;
+}
+
+.alerts-panel { display: flex; flex-direction: column; gap: 12px; }
+
+.alert-item {
+  display: flex;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  background: var(--card-bg);
+  overflow: hidden;
+}
+
+.alert-marker { width: 6px; flex-shrink: 0; }
+
+/* Niveaux d'alerte sans vert */
+.alert-info .alert-marker { background-color: var(--accent-blue-soft); }
+.alert-warning .alert-marker { background-color: #eab308; }
+.alert-error .alert-marker { background-color: #ef4444; }
+
+.alert-content { padding: 12px; }
+.alert-message { font-size: 13px; font-weight: 600; color: var(--text-primary); }
+
+
+/* Container de la Card */
+.slider-container {
+  overflow: hidden;
+  padding: 10px 0;
+}
+
+/* Slider horizontal pour les robots */
+.robot-slider-track {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  gap: 20px;
+}
+
+.robot-state-card {
+  flex: 0 0 calc(50% - 10px); /* Affiche 2 robots exactement */
+  min-width: 0; /* Évite les bugs de texte qui dépasse */
+  padding: 20px;
+  background: #ffffff;
+  border: 1px solid rgba(8, 31, 92, 0.1);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(8, 31, 92, 0.08);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.robot-state-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  border-color: #3b82f6;
+}
+
+/* --- ÉVITER LE TEXTE COLLÉ --- */
+.robot-info-line {
+  display: flex;
+  justify-content: space-between; /* Pousse le texte aux deux extrémités */
+  align-items: center;
+  margin-bottom: 12px; /* Espace entre les lignes */
+}
+
+.label {
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #546FA8;
+}
+
+.value {
+  font-weight: 700;
+  color: #081F5C;
+}
+
+/* Barre de batterie aérée */
+.progress-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 0.6; /* Prend de la place pour ne pas coller au label */
+}
+
+.progress-bar {
+  flex: 1;
+  height: 6px;
+  background: #E2E8F0;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: #24386E; /* Bleu NavBot au lieu du vert */
+}
+
+/* Flèches de navigation */
+.slider-controls {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.slider-arrow {
+  background: #D4EBFF; /* Ton bleu ciel */
+  border: none;
+  padding: 5px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  color: #081F5C;
+  transition: all 0.3s ease;
+}
+
+.slider-arrow:hover:not(:disabled) {
+  background: #BFDBFE;
+  transform: scale(1.05);
+}
+
+.slider-arrow:disabled {
+  background: #f1f5f9;
+  color: #9ca3af;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.page-indicator {
+  font-size: 12px;
+  font-weight: 600;
+  color: #6b7280;
+  background: #f9fafb;
+  padding: 4px 8px;
+  border-radius: 4px;
+  border: 1px solid #e5e7eb;
+}
+
+/* Container principal */
+.missions-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 5px;
+}
+
+/* Carte de mission individuelle */
+.mission-item {
+  padding: 16px;
+  border: 1px solid rgba(84, 111, 168, 0.1);
+  border-radius: 12px;
+  background: #ffffff;
+  transition: all 0.3s ease;
+}
+
+.mission-item:hover {
+  border-color: #D4EBFF;
+  box-shadow: 0 4px 12px rgba(8, 31, 92, 0.05);
+}
+
+/* Header : Titre + Badge */
+.mission-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.mission-name {
+  color: #081F5C;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+/* Badges de statut (Remplacement du vert) */
+.mission-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+/* Running -> Bleu ciel, Completed -> Bleu moyen, Queued -> Ambre */
+.status-running { background: #D4EBFF; color: #081F5C; }
+.status-completed { background: #24386E; color: #ffffff; }
+.status-queued { background: #FFF7ED; color: #C2410C; }
+
+/* Robot Info */
+.mission-robot {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #546FA8;
+  font-size: 13px;
+  margin-bottom: 15px;
+}
+
+/* Barre de progression (Remplacement du vert par le bleu) */
+.mission-progress-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.progress-bar {
+  flex: 1;
+  height: 6px;
+  background: #F1F5F9;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  /* Dégradé de bleu au lieu du vert de la capture */
+  background: linear-gradient(90deg, #546FA8, #081F5C);
+  border-radius: 10px;
+}
+
+.progress-percentage {
+  font-size: 12px;
+  font-weight: 600;
+  color: #546FA8;
+  min-width: 30px;
+}

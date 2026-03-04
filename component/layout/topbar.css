@@ -1,0 +1,123 @@
+/* ---------------------------------------------------------
+   TOPBAR MAIN CONTAINER
+--------------------------------------------------------- */
+.topbar {
+  height: 60px;
+  min-height: 60px;
+  max-height: 60px;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  backdrop-filter: blur(10px);
+  background: var(--topbar-bg);
+  
+  /* Bordure inférieure lumineuse pour séparer du contenu */
+  border-bottom: 2px solid rgba(59, 130, 246, 0.2); 
+  
+  color: var(--text-primary);
+  transition: all 0.3s ease;
+  position: relative; /* Changé de z-index: 100 à position: relative */
+  z-index: 10;
+}
+
+/* ---------------------------------------------------------
+   LEFT SECTION (MENU MOBILE)
+--------------------------------------------------------- */
+.topbar-menu-btn {
+  display: none; /* Caché sur desktop, affiché via media query */
+  align-items: center;
+}
+
+/* ---------------------------------------------------------
+   RIGHT SECTION (ACTIONS)
+--------------------------------------------------------- */
+.topbar-actions {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  margin-left: auto; /* Pousse les icônes à droite */
+}
+
+/* ---------------------------------------------------------
+   BUTTONS STYLE (Theme, Bell, User, Menu)
+--------------------------------------------------------- */
+.theme-toggle,
+.notifications-button,
+.profile-button,
+.menu-button {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(59, 130, 246, 0.15); /* Bordure bleue discrète */
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  color: var(--text-primary);
+  position: relative;
+  outline: none;
+}
+
+/* EFFET AU SURVOL (HOVER) */
+.theme-toggle:hover,
+.notifications-button:hover,
+.profile-button:hover,
+.menu-button:hover {
+  background: rgba(59, 130, 246, 0.1);
+  border-color: rgba(59, 130, 246, 0.6); /* La bordure s'illumine */
+  color: #3b82f6; /* Icône devient bleue */
+  
+  /* Effet de lueur (Glow) */
+  box-shadow: 0 0 12px rgba(59, 130, 246, 0.3);
+  filter: drop-shadow(0 0 2px rgba(59, 130, 246, 0.4));
+}
+
+/* EFFET AU CLIC (ACTIVE) */
+.theme-toggle:active,
+.notifications-button:active,
+.profile-button:active,
+.menu-button:active {
+  transform: scale(0.92);
+}
+
+/* ---------------------------------------------------------
+   TABLET RESPONSIVE (481px - 768px)
+--------------------------------------------------------- */
+@media (max-width: 768px) {
+  .topbar {
+    height: 56px;
+    padding: 0 16px;
+  }
+
+  .topbar-actions {
+    gap: 10px;
+  }
+  
+  .theme-toggle, .notifications-button, .profile-button {
+    padding: 7px;
+  }
+}
+
+/* ---------------------------------------------------------
+   MOBILE RESPONSIVE (< 480px)
+--------------------------------------------------------- */
+@media (max-width: 480px) {
+  .topbar {
+    height: 52px;
+    padding: 0 12px;
+  }
+
+  .topbar-menu-btn {
+    display: flex; /* Affiche le bouton menu burger sur mobile */
+  }
+
+  .topbar-actions {
+    gap: 8px;
+  }
+
+  .theme-toggle, .notifications-button, .profile-button {
+    padding: 6px;
+  }
+}

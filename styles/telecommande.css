@@ -1,0 +1,212 @@
+/* ============================================================
+   CONTENEUR PRINCIPAL & LAYOUT
+   ============================================================ */
+.teleop-page {
+  display: contents;
+}
+
+.teleop-main {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* Aligné à gauche comme sur l'image */
+  gap: 48px;
+  padding: 20px 0;
+}
+
+/* ============================================================
+   PAD DE CONTRÔLE (FLÈCHES)
+   ============================================================ */
+.teleop-pad {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.teleop-middle-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.teleop-btn {
+  width: 58px;
+  height: 58px;
+  border-radius: 20px; /* Plus arrondi pour coller au style */
+  border: none;
+  background: #f8fafc;
+  color: #334155;
+  font-size: 20px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.teleop-btn:hover {
+  background: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  color: #2563eb;
+}
+
+.teleop-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Bouton STOP central */
+.teleop-btn.stop {
+  background: #fee2e2;
+  color: #1e293b;
+  border: 1px solid #fecaca;
+}
+
+.teleop-btn.stop:hover {
+  background: #fecaca;
+  color: #ef4444;
+}
+
+/* ============================================================
+   SECTION VITESSE (CHIPS)
+   ============================================================ */
+.teleop-speed {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.teleop-speed p {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.speed-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.chip {
+  padding: 8px 18px;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  color: #64748b;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.chip:hover {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+}
+
+.chip.active {
+  background: #2563eb;
+  color: white;
+  border-color: #2563eb;
+  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.2);
+}
+
+/* ============================================================
+   ROBOT STATUS (LISTE)
+   ============================================================ */
+.teleop-list {
+  list-style: none;
+  width: 100%;
+  max-width: 400px;
+}
+
+.teleop-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #f1f5f9;
+  font-size: 0.85rem;
+  color: #1e293b;
+  font-weight: 700;
+}
+
+.teleop-list span {
+  font-weight: 500;
+  color: #94a3b8;
+  text-transform: capitalize;
+}
+
+/* Valeurs spécifiques en bleu foncé/gras */
+.teleop-list li b {
+  color: #0f172a;
+}
+
+/* ============================================================
+   SAFETY & EMERGENCY STOP
+   ============================================================ */
+.teleop-safety {
+  margin-top: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  background: #ffffff;
+  border-radius: 16px;
+  border: 1px solid #f1f5f9;
+}
+
+.teleop-safety p {
+  font-size: 0.8rem;
+  color: #64748b;
+  max-width: 300px;
+}
+
+.btn-emergency {
+  padding: 12px 28px;
+  border-radius: 12px;
+  border: none;
+  background: #dc2626; /* Rouge vif comme sur l'image */
+  color: white;
+  font-weight: 800;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(220, 38, 38, 0.3);
+  transition: all 0.2s;
+}
+
+.btn-emergency:hover {
+  background: #b91c1c;
+  transform: scale(1.02);
+  box-shadow: 0 10px 25px rgba(220, 38, 38, 0.4);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 1024px) {
+  .teleop-main {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 32px;
+  }
+}
+
+@media (max-width: 480px) {
+  .teleop-safety {
+    flex-direction: column;
+    text-align: center;
+    gap: 16px;
+  }
+  
+  .teleop-btn {
+    width: 50px;
+    height: 50px;
+  }
+}

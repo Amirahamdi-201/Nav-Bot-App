@@ -1,0 +1,303 @@
+/* 1. FORCE L'EXTENSION DU CONTENEUR GLOBAL */
+.alerts-grid-container {
+  display: grid;
+  grid-template-columns: 1fr 300px; 
+  gap: 24px;
+  width: 100% !important;
+  max-width: 100% !important;
+  align-items: start;
+}
+
+/* 2. RÉSUMÉ DES ALERTES */
+.alerts-summary {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+/* 3. LISTE DES ALERTES */
+.alerts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  max-height: 800px;
+  overflow-y: auto;
+}
+
+/* 4. TES CARTES */
+.summary-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  border-radius: 10px;
+  text-align: center;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.alert-item {
+  display: flex;
+  width: 100%;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 10px;
+  border: 2px solid;
+  background: #ffffff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  align-items: center; /* Aligne verticalement le contenu et les boutons */
+}
+
+/* ============================================================
+   RÉVISION : POLICE RÉDUITE ET BOUTONS À DROITE
+   ============================================================ */
+
+.alert-content {
+  flex: 1; /* Prend tout l'espace pour pousser les actions à droite */
+}
+
+.alert-title {
+  font-size: 0.85rem !important; /* Police diminuée */
+  font-weight: 700;
+}
+
+.alert-message {
+  font-size: 0.75rem !important; /* Police diminuée */
+  margin: 2px 0;
+}
+
+.alert-timestamp, .alert-meta {
+  font-size: 0.7rem !important; /* Police diminuée */
+}
+
+.alert-actions {
+  display: flex;
+  gap: 8px;
+  margin-left: auto; /* POUSSE LES BOUTONS MAX À DROITE */
+}
+
+/* Style moderne des boutons d'action */
+.action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+  background: white;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.acknowledge-btn:hover { background: #22c55e; color: white; border-color: #22c55e; }
+.delete-btn:hover { background: #ef4444; color: white; border-color: #ef4444; }
+
+/* ============================================================
+   ZONE FILTRES (Zone image_fe8f87.png)
+   ============================================================ */
+
+.filter-group label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #475569;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.filter-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.filter-level-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  font-size: 0.75rem;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  background: white;
+  cursor: pointer;
+}
+
+.filter-level-btn.active {
+  background: #22c55e;
+  color: white;
+  border-color: #22c55e;
+}
+
+/* Bouton Effacer les reconnues (Style image_fe8f87.png) */
+.btn-clear-all {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 10px;
+  margin-top: 15px;
+  background-color: #fee2e2;
+  color: #ef4444;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-clear-all:hover {
+  background-color: #fecaca;
+}
+
+/* ============================================================
+   COULEURS DES ALERTES
+   ============================================================ */
+.summary-card.alert-critical { background: #fee2e2; color: #dc2626; border: 1px solid #fecaca; }
+.summary-card.alert-warning { background: #fef9c3; color: #ca8a04; border: 1px solid #fef08a; }
+.summary-card.alert-unread { background: #dbeafe; color: #2563eb; border: 1px solid #bfdbfe; }
+.summary-card.alert-total { background: #f0fdf4; color: #16a34a; border: 1px solid #bbf7d0; }
+
+.alert-item.alert-error { border-color: #fecaca; border-left: 6px solid #ef4444; }
+.alert-item.alert-warning { border-color: #fef08a; border-left: 6px solid #eab308; }
+.alert-item.alert-success { border-color: #bbf7d0; border-left: 6px solid #22c55e; }
+.alert-item.alert-info { border-color: #bfdbfe; border-left: 6px solid #3b82f6; }
+
+.alert-item.acknowledged {
+  opacity: 0.6;
+}
+
+/* ============================================================
+   AJOUT : DÉTAILS DE L'ALERTE (Panel de droite)
+   ============================================================ */
+
+.alert-details {
+  display: flex;
+  flex-direction: column;
+  gap: 16px; /* Espacement entre les sections Informations/Message/Chronologie */
+}
+
+/* Titres de sections (Informations, Chronologie, etc.) */
+.alert-details h4 {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  border-bottom: 1px solid #f1f5f9;
+  padding-bottom: 6px;
+}
+
+/* Lignes de données (Label à gauche, Valeur à droite) */
+.alert-details .detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 0.85rem;
+}
+
+.alert-details .detail-row span:first-child {
+  color: #94a3b8; /* Couleur grise pour les labels comme 'Niveau' */
+}
+
+/* Badge de Niveau (Warning, Error, etc.) */
+.level-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 0.75rem;
+}
+
+.level-badge.level-warning { background: #fef9c3; color: #ca8a04; border: 1px solid #fef08a; }
+.level-badge.level-error { background: #fee2e2; color: #ef4444; border: 1px solid #fecaca; }
+.level-badge.level-success { background: #f0fdf4; color: #16a34a; border: 1px solid #bbf7d0; }
+.level-badge.level-info { background: #dbeafe; color: #2563eb; border: 1px solid #bfdbfe; }
+
+/* Badge de Statut (Active / Reconnue) */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 0.75rem;
+}
+
+.status-badge.status-active { background: #fee2e2; color: #ef4444; }
+.status-badge.status-acknowledged { background: #f1f5f9; color: #64748b; }
+
+/* Zone du message détaillé */
+.message-box {
+  background: #f0fdf4; /* Couleur verte très claire comme sur ton image fe9a09.png */
+  border-left: 4px solid #22c55e;
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  color: #1e293b;
+  margin: 0;
+}
+
+/* Boutons d'action en bas */
+.detail-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.detail-btn {
+  flex: 1; /* Les boutons se partagent la largeur 50/50 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+}
+
+/* Bouton Reconnaître (Vert) */
+.detail-btn.acknowledge-btn {
+  background-color: #22c55e;
+  color: white;
+}
+
+.detail-btn.acknowledge-btn:hover {
+  background-color: #16a34a;
+}
+
+/* Bouton Supprimer (Rose clair) */
+.detail-btn.delete-btn {
+  background-color: #fee2e2;
+  color: #ef4444;
+  border: 1px solid #fecaca;
+}
+
+.detail-btn.delete-btn:hover {
+  background-color: #fecaca;
+}
+
+/* Bouton déjà reconnu (Grisé) */
+.detail-btn.acknowledged-btn {
+  background-color: #f1f5f9;
+  color: #94a3b8;
+  border: 1px solid #e2e8f0;
+  cursor: not-allowed;
+}

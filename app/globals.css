@@ -2,7 +2,7 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #0a0a0a;
 }
 
 @theme inline {
@@ -12,15 +12,87 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* 🧱 BASE */
+body {
+  margin: 0;
+  min-height: 100vh;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* 🌄 BACKGROUND APPLIQUÉ PARTOUT (Sauf /user) */
+/* Cette classe sera ajoutée dynamiquement par le RootLayout */
+.main-app-bg {
+  background-color: #D4EBFF;
+  background-image: url("/background_app1.png"), url("/background_app.png");
+  background-repeat: no-repeat, no-repeat;
+  background-position: left center, right center;
+  background-size: contain, contain;
+  background-attachment: fixed;
+}
+
+/* 🌑 STYLE NEUTRE POUR LE DASHBOARD (/user) */
+.dashboard-clean-bg {
+  background-color: #f8fafc; /* Gris très clair pro */
+  background-image: none !important;
+}
+
+/* 🎨 SCROLLBAR PERSONNALISÉE */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #24386E;
+  border-radius: 10px;
+  border: 2px solid #f1f5f9;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #1a2a52;
+}
+
+
+/* globals.css */
+
+:root {
+  /* Mode Clair (Par défaut) */
+  --topbar-bg: rgba(255, 255, 255, 0.8);
+  --sidebar-bg: rgba(255, 255, 255, 0.9);
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+  --border-light: rgba(59, 130, 246, 0.1);
+  --background-page: #f8fafc;
+}
+:root {
+  /* MODE CLAIR */
+  --topbar-bg: rgba(255, 255, 255, 0.8);
+  --sidebar-bg: rgba(248, 250, 252, 0.9);
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+  --border-light: rgba(59, 130, 246, 0.15);
+  --background-page: #ffffff;
+}
+
+body.dark-mode {
+  /* Fond de page : Bleu ultra profond */
+  --background-page: #040D1A; 
+  
+  /* Sidebar et Topbar : Ton bleu le plus sombre */
+  --sidebar-bg: rgba(8, 31, 92, 0.95); /* #081F5C */
+  --topbar-bg: rgba(8, 31, 92, 0.9);
+  
+  /* Cartes du Dashboard : Bleu intermédiaire */
+  --card-bg: rgba(36, 56, 110, 0.4); /* #24386E avec transparence */
+  
+  /* Textes : Blanc et Bleu clair */
+  --text-primary: #F8FAFC;
+  --text-secondary: #546FA8; /* Ton bleu clair pour les labels */
+  --text-tertiary: #475569;
+
+  /* Bordures : Bleu acier subtil */
+  --border-light: rgba(84, 111, 168, 0.3); /* #546FA8 */
 }
